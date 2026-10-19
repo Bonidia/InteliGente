@@ -50,7 +50,11 @@ def salvar_dados_alunos(df):
 def tela_cadastro_aluno():
     st.subheader("📋 Cadastro de Aluno com QR Code")
 
-    modo_qr = st.radio("Como deseja fornecer o QR Code do aluno?", ["📷 Escanear com a câmera", "⌨️ Digitar manualmente"])
+    modo_qr = st.radio(
+        "Como deseja fornecer o QR Code do aluno?",
+        ["📷 Escanear com a câmera", "⌨️ Digitar manualmente"],
+        key="radio_cadastro_qr"
+    )
 
     if modo_qr == "📷 Escanear com a câmera":
         id_qrcode = qrcode_scanner(key="leitor_qr")
@@ -129,7 +133,11 @@ def tela_creditos(tipo_operacao):
     titulo = "➕ Adicionar Créditos" if tipo_operacao == "adicao" else "➖ Remover Créditos"
     st.subheader(titulo)
 
-    modo = st.radio("Modo de identificação do aluno:", ["📷 Escanear QR Code", "⌨️ Digitar Manualmente"])
+    modo = st.radio(
+        "Modo de identificação do aluno:",
+        ["📷 Escanear QR Code", "⌨️ Digitar Manualmente"],
+        key=f"radio_creditos_{tipo_operacao}"
+    )
 
     id_qrcode = None
     if modo == "📷 Escanear QR Code":
@@ -187,7 +195,11 @@ def tela_creditos(tipo_operacao):
 def tela_visualizar_saldo():
     st.subheader("📦 Consultar Saldo do Aluno")
     
-    modo = st.radio("Modo de identificação do aluno:", ["📷 Escanear QR Code", "⌨️ Digitar Manualmente"])
+    modo = st.radio(
+        "Modo de identificação do aluno:",
+        ["📷 Escanear QR Code", "⌨️ Digitar Manualmente"],
+        key="radio_consulta_saldo"
+    )    
     
     id_qrcode = None
     if modo == "📷 Escanear QR Code":
@@ -308,14 +320,18 @@ def tela_painel():
     
     st.sidebar.success(f"Usuário: {st.session_state['usuario']}")
     
-    menu = st.sidebar.radio("📚 Menu Principal", [
-        "📋 Cadastro de Aluno",
-        "➕ Adicionar Créditos",
-        "➖ Remover Créditos",
-        "📦 Visualizar Saldo",
-        "🔎 Consultar por Nome",
-        "🚪 Sair"
-    ])
+    menu = st.sidebar.radio(
+        "📚 Menu Principal",
+        [
+            "📋 Cadastro de Aluno",
+            "➕ Adicionar Créditos",
+            "➖ Remover Créditos",
+            "📦 Visualizar Saldo",
+            "🔎 Consultar por Nome",
+            "🚪 Sair"
+        ],
+        key="radio_menu_principal"
+    )
 
     st.markdown(f"<h2 style='color:{COR_TEXTO};'>🧙‍♂️ {menu}</h2>", unsafe_allow_html=True)
 
